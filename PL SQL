@@ -1,27 +1,324 @@
-Program 1
-Write a code in PL/SQL to develop a trigger that enforces referential integrity by
-preventing the deletion of a parent record if child records exist.
+PROGRAM 1
+Write a PL/SQL block to calculate the incentive of an employee whose ID is 110.
 
-Program 2
-Write a code in PL/SQL to create a trigger that checks for duplicate values in a
-specific column and raises an exception if found.
 
-Program 3
-Write a code in PL/SQL to create a trigger that restricts the insertion of new rows if
-the total of a column&#39;s values exceeds a certain threshold.
 
-Program 4
-Write a code in PL/SQL to design a trigger that captures changes made to specific
-columns and logs them in an audit table.
 
-Program 5
-Write a code in PL/SQL to implement a trigger that records user activity (inserts,
-updates, deletes) in an audit log for a given set of tables.
 
-Program 7
-Write a code in PL/SQL to implement a trigger that automatically calculates and
-updates a running total column for a table whenever new rows are inserted.
 
-Program 8
-Write a code in PL/SQL to create a trigger that validates the availability of items
-before allowing an order to be placed, considering stock levels and pending orders.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 2
+Write a PL/SQL block to show an invalid case-insensitive reference to a quoted and without quoted user-defined identifier.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 3
+Write a PL/SQL block to adjust the salary of the employee whose ID 122.
+Sample table: employees
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 4
+ Write a PL/SQL block to create a procedure using the "IS [NOT] NULL Operator" and show AND operator returns TRUE if and only if both operands are TRUE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 5
+Write a PL/SQL block to describe the usage of LIKE operator including wildcard characters and escape character.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM  6
+Write a PL/SQL program to arrange the number of two variable in such a way that the small number will store in num_small variable and large number will store in num_large variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 7
+Write a PL/SQL procedure to calculate the incentive on a target achieved and display the message either the record updated or not.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 8
+Write a PL/SQL procedure to calculate incentive achieved according to the specific sale limit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 9
+Write a PL/SQL program to count number of employees in department 50 and check whether this department have any vacancies or not. There are 45 vacancies in this department.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 10
+ Write a PL/SQL program to count number of employees in a specific department and check whether this department have any vacancies or not. If any vacancies, how many vacancies are in that department.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 11
+Write a PL/SQL program to display the employee IDs, names, job titles, hire dates, and salaries of all employees.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 12
+Write a PL/SQL program to display the employee IDs, names, and department names of all employees.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 13
+ Write a PL/SQL program to display the job IDs, titles, and minimum salaries of all jobs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 14
+ Write a PL/SQL program to display the employee IDs, names, and job history start dates of all employees.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 15
+Write a PL/SQL program to display the employee IDs, names, and job history end dates of all employees.
+
+
+
