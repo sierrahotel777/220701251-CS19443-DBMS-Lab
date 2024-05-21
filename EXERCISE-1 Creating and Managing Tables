@@ -1,48 +1,48 @@
 1.	Create the DEPT table based on the DEPARTMENT following the table instance chart below. Confirm that the table is created.
-CREATE TABLE DEPT (
-    ID NUMBER(7),
-    NAME VARCHAR2(25),
-    CONSTRAINT PK_DEPT PRIMARY KEY (ID)
-);
+        CREATE TABLE DEPT (
+            ID NUMBER(7),
+            NAME VARCHAR2(25),
+            CONSTRAINT PK_DEPT PRIMARY KEY (ID)
+        );
 
 2.	Create the EMP table based on the following instance chart.  Confirm that the table is created.
 
-CREATE TABLE EMP (
-    ID NUMBER(7),
-    LAST_NAME VARCHAR2(25),
-    FIRST_NAME VARCHAR2(25),
-    DEPT_ID NUMBER,
-    CONSTRAINT PK_EMP PRIMARY KEY (ID),
-    CONSTRAINT FK_DEPT_EMP FOREIGN KEY (DEPT_ID) REFERENCES DEPT(ID)
-);
+        CREATE TABLE EMP (
+            ID NUMBER(7),
+            LAST_NAME VARCHAR2(25),
+            FIRST_NAME VARCHAR2(25),
+            DEPT_ID NUMBER,
+            CONSTRAINT PK_EMP PRIMARY KEY (ID),
+            CONSTRAINT FK_DEPT_EMP FOREIGN KEY (DEPT_ID) REFERENCES DEPT(ID)
+        );
 
 3.	Modify the EMP table to allow for longer employee last names. Confirm the modification.(Hint: Increase the size to 50)
 
-ALTER TABLE EMP MODIFY (LAST_NAME VARCHAR2(50));
+        ALTER TABLE EMP MODIFY (LAST_NAME VARCHAR2(50));
 
 4.	Create the EMPLOYEES2 table based on the structure of EMPLOYEES table. Include Only the Employee_id, First_name, Last_name, Salary and Dept_id coloumns. Name the columns Id, First_name, Last_name, salary and Dept_id respectively.
 
-CREATE TABLE EMPLOYEES2 (
-    Id NUMBER(6),
-    First_name VARCHAR2(20),
-    Last_name VARCHAR2(50),
-    Salary NUMBER(8,2),
-    Dept_id NUMBER(4)
-);
+        CREATE TABLE EMPLOYEES2 (
+            Id NUMBER(6),
+            First_name VARCHAR2(20),
+            Last_name VARCHAR2(50),
+            Salary NUMBER(8,2),
+            Dept_id NUMBER(4)
+        );
 
 5.	Drop the EMP table.
 
-DROP TABLE EMP;
+        DROP TABLE EMP;
 
 6.	Rename the EMPLOYEES2 table as EMP.
 
-ALTER TABLE EMPLOYEES2 RENAME TO EMP;
+        ALTER TABLE EMPLOYEES2 RENAME TO EMP;
 
 7.	Add a comment on DEPT and EMP tables. Confirm the modification by describing the table.
 
-COMMENT ON TABLE DEPT IS 'This table stores department information.';
-COMMENT ON TABLE EMP IS 'This table stores employee information.';
+        COMMENT ON TABLE DEPT IS 'This table stores department information.';
+        COMMENT ON TABLE EMP IS 'This table stores employee information.';
 
 8.	Drop the First_name column from the EMP table and confirm it.
 
-ALTER TABLE EMP DROP COLUMN First_name;
+        ALTER TABLE EMP DROP COLUMN First_name;
