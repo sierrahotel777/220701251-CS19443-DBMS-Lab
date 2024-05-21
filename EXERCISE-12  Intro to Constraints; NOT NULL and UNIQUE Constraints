@@ -1,1 +1,31 @@
+1.	What is a “constraint” as it relates to data integrity?
+
+
+2.	What are the limitations of constraints that may be applied at the column level and at the table level?
+
+
+3.	Why is it important to give meaningful names to constraints?
+
+
+
+4.	Based on the information provided by the owners, choose a datatype for each column. Indicate the length, precision, and scale for each NUMBER datatype.
+
+
+5.	Use “(nullable)” to indicate those columns that can have null values.
+
+
+6.	Write the CREATE TABLE statement for the Global Fast Foods locations table to define the constraints at the column level.
+
+
+
+7.	Execute the CREATE TABLE statement in Oracle Application Express.
+
+
+
+8.	Execute a DESCRIBE command to view the Table Summary information.
+
+
+
+
+9.	Rewrite the CREATE TABLE statement for the Global Fast Foods locations table to define the UNIQUE constraints at the table level. Do not execute this statement.
 
