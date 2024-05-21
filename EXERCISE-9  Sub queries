@@ -1,1 +1,73 @@
+1. Write a query to display the last name and hire date of any employee in the same
+   department as Zlotkey. Exclude Zlotkey.
 
+    SELECT e.last_name, e.hire_date
+    FROM employees e
+    JOIN employees e2 ON e.department_id = e2.department_id
+    WHERE e2.last_name = :user_last_name AND e.last_name != :user_last_name;
+
+2. Create a query to display the employee numbers and last names of all employees who earn more
+   than the average salary. Sort the results in ascending order of salary.
+
+    SELECT employee_id, last_name, salary
+    FROM employees
+    WHERE salary > (SELECT AVG(salary) FROM employees)
+    ORDER BY salary ASC;
+
+3. Write a query that displays the employee numbers and last names of all employees who work in a
+   department with any employee whose last name contains a u. Place your SQL statement in a text
+   file named lab6_3.sql. Run your query.
+
+    SELECT employee_id, last_name
+    FROM employees
+    WHERE department_id IN (
+        SELECT department_id
+        FROM employees
+        WHERE last_name LIKE '%u%'
+    );
+
+4. Display the last name, department number, and job ID of all employees whose department location
+   ID is 1700.
+
+    SELECT last_name, department_id, job_id
+    FROM employees
+    WHERE department_id IN (
+        SELECT department_id
+        FROM departments
+        WHERE location_id = 1700
+    );
+
+5. Display the last name and salary of every employee who reports to King.
+
+    SELECT last_name, salary
+    FROM employees
+    WHERE manager_id = (
+        SELECT employee_id
+        FROM employees
+        WHERE last_name = 'King'
+    );
+
+6. Display the department number, last name, and job ID for every employee in the Executive
+   department.
+
+    SELECT department_id, last_name, job_id
+    FROM employees
+    WHERE department_id = (
+        SELECT department_id
+        FROM departments
+        WHERE department_name = 'Executive'
+    );
+
+7. Modify the query in lab6_3.sql to display the employee numbers, last names, and salaries of
+   all employees who earn more than the average salary and who work in a department with any
+   employee with a u in their name. Resave lab6_3.sql to lab6_7.sql. Run the statement in
+   lab6_7.sql.
+
+    SELECT e.employee_id, e.last_name, e.salary
+    FROM employees e
+    WHERE e.department_id IN (
+        SELECT department_id
+        FROM employees
+        WHERE last_name LIKE '%u%'
+    )
+    AND e.salary > (SELECT AVG(salary) FROM employees);
