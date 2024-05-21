@@ -1,0 +1,27 @@
+Program 1
+Write a code in PL/SQL to develop a trigger that enforces referential integrity by
+preventing the deletion of a parent record if child records exist.
+
+Program 2
+Write a code in PL/SQL to create a trigger that checks for duplicate values in a
+specific column and raises an exception if found.
+
+Program 3
+Write a code in PL/SQL to create a trigger that restricts the insertion of new rows if
+the total of a column&#39;s values exceeds a certain threshold.
+
+Program 4
+Write a code in PL/SQL to design a trigger that captures changes made to specific
+columns and logs them in an audit table.
+
+Program 5
+Write a code in PL/SQL to implement a trigger that records user activity (inserts,
+updates, deletes) in an audit log for a given set of tables.
+
+Program 7
+Write a code in PL/SQL to implement a trigger that automatically calculates and
+updates a running total column for a table whenever new rows are inserted.
+
+Program 8
+Write a code in PL/SQL to create a trigger that validates the availability of items
+before allowing an order to be placed, considering stock levels and pending orders.
