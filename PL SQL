@@ -1,262 +1,296 @@
 PROGRAM 1
 Write a PL/SQL block to calculate the incentive of an employee whose ID is 110.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_employee_id NUMBER := 110;
+      v_salary      NUMBER;
+      v_incentive   NUMBER;
+  BEGIN
+      -- Fetching the salary of the employee
+      SELECT salary INTO v_salary
+      FROM EMPLOYEE_SALARY
+      WHERE employee_id = v_employee_id;
+  
+      IF v_salary < 50000 THEN
+          v_incentive := v_salary * 0.05; -- 5% incentive
+      ELSE
+          v_incentive := v_salary * 0.1;  -- 10% incentive
+      END IF;
+  
+      DBMS_OUTPUT.PUT_LINE('Incentive for employee ' || v_employee_id || ' is ' || v_incentive);
+  END;
+  /
 
 PROGRAM 2
 Write a PL/SQL block to show an invalid case-insensitive reference to a quoted and without quoted user-defined identifier.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_Var1 NUMBER;
+  BEGIN
+      v_Var1 := 10;
+      DBMS_OUTPUT.PUT_LINE('Value of v_Var1: ' || v_Var1);
+  END;
+  /
 
 PROGRAM 3
 Write a PL/SQL block to adjust the salary of the employee whose ID 122.
 Sample table: employees
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_employee_id NUMBER := 112;
+      v_salary      NUMBER;
+      v_adjustment  NUMBER := 0.1;
+  BEGIN
+      SELECT salary INTO v_salary
+      FROM employee_salary
+      WHERE employee_id = v_employee_id;
+  
+      UPDATE employee_salary
+      SET salary = salary * (1 + v_adjustment)
+      WHERE employee_id = v_employee_id;
+  
+      DBMS_OUTPUT.PUT_LINE('Salary of employee ' || v_employee_id || ' adjusted to: ' || v_salary * (1 + v_adjustment));
+  END;
+  /
 
 PROGRAM 4
  Write a PL/SQL block to create a procedure using the "IS [NOT] NULL Operator" and show AND operator returns TRUE if and only if both operands are TRUE.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  CREATE OR REPLACE PROCEDURE check_not_null(
+      a IN NUMBER,
+      b IN NUMBER
+  )
+  IS
+  BEGIN
+      IF a IS NOT NULL AND b IS NOT NULL THEN
+          DBMS_OUTPUT.PUT_LINE('Both operands are NOT NULL.');
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('At least one operand is NULL.');
+      END IF;
+  END;
+  /
+  
+THEN EXECUTE
+  
+  BEGIN
+      check_not_null(10, 20);
+     
+      check_not_null(NULL, 20);
+  END;
 
 PROGRAM 5
 Write a PL/SQL block to describe the usage of LIKE operator including wildcard characters and escape character.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_pattern VARCHAR2(50) := 'S\_A%';
+  BEGIN
+      IF 'SALESMAN' LIKE v_pattern THEN
+          DBMS_OUTPUT.PUT_LINE('The string "SALESMAN" matches the pattern.');
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('The string "SALESMAN" does not match the pattern.');
+      END IF;
+  
+      IF 'SUPERVISOR' LIKE v_pattern THEN
+          DBMS_OUTPUT.PUT_LINE('The string "SUPERVISOR" matches the pattern.');
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('The string "SUPERVISOR" does not match the pattern.');
+      END IF;
+  END;
+  /
 
 PROGRAM  6
 Write a PL/SQL program to arrange the number of two variable in such a way that the small number will store in num_small variable and large number will store in num_large variable.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      num1 NUMBER := 10;
+      num2 NUMBER := 5;
+      num_small NUMBER;
+      num_large NUMBER;
+  BEGIN
+      IF num1 < num2 THEN
+          num_small := num1;
+          num_large := num2;
+      ELSE
+          num_small := num2;
+          num_large := num1;
+      END IF;
+  
+      DBMS_OUTPUT.PUT_LINE('The smaller number is: ' || num_small);
+      DBMS_OUTPUT.PUT_LINE('The larger number is: ' || num_large);
+  END;
+  /
 
 PROGRAM 7
 Write a PL/SQL procedure to calculate the incentive on a target achieved and display the message either the record updated or not.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  CREATE OR REPLACE PROCEDURE calculate_incentive(
+      emp_id IN NUMBER,
+      target_achieved IN NUMBER
+  )
+  IS
+      v_incentive NUMBER;
+      v_column_count NUMBER;
+  BEGIN
+      IF target_achieved >= 100 THEN
+          v_incentive := 1000; -- Incentive amount if target achieved is 100 or more
+      ELSE
+          v_incentive := 0;    -- No incentive if target achieved is less than 100
+      END IF;
+  
+      SELECT COUNT(*)
+      INTO v_column_count
+      FROM user_tab_columns
+      WHERE table_name = 'EMPLOYEE_SALARY' AND column_name = 'INCENTIVE';
+  
+      IF v_column_count = 0 THEN
+          BEGIN
+              EXECUTE IMMEDIATE 'ALTER TABLE EMPLOYEE_SALARY ADD (INCENTIVE NUMBER)';
+          EXCEPTION
+              WHEN OTHERS THEN
+                  DBMS_OUTPUT.PUT_LINE('Error adding incentive column: ' || SQLERRM);
+          END;
+      END IF;
+  
+      BEGIN
+          EXECUTE IMMEDIATE 'UPDATE EMPLOYEE_SALARY SET INCENTIVE = :v_incentive WHERE EMPLOYEE_ID = :emp_id'
+          USING v_incentive, emp_id;
+          DBMS_OUTPUT.PUT_LINE('Incentive calculated and record updated successfully.');
+      EXCEPTION
+          WHEN OTHERS THEN
+              DBMS_OUTPUT.PUT_LINE('Error updating incentive: ' || SQLERRM);
+      END;
+  END;
+  /
+  
+  
+  
+  
+  THEN
+  
+  
+  BEGIN
+      calculate_incentive(110, 95); -- Employee ID 110, 95% target achieved
+  END;
+  /
 
 PROGRAM 8
 Write a PL/SQL procedure to calculate incentive achieved according to the specific sale limit.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  CREATE OR REPLACE PROCEDURE calculate_incentive(
+      emp_id IN NUMBER,
+      total_sales IN NUMBER,
+      sale_limit IN NUMBER,
+      incentive_rate IN NUMBER
+  )
+  IS
+      v_incentive NUMBER;
+      v_column_count NUMBER;
+  BEGIN
+      SELECT COUNT(*)
+      INTO v_column_count
+      FROM user_tab_columns
+      WHERE table_name = 'EMPLOYEE_SALARY' AND column_name = 'INCENTIVE';
+  
+      IF v_column_count = 0 THEN
+          BEGIN
+              EXECUTE IMMEDIATE 'ALTER TABLE EMPLOYEE_SALARY ADD (INCENTIVE NUMBER)';
+          EXCEPTION
+              WHEN OTHERS THEN
+                  DBMS_OUTPUT.PUT_LINE('Error adding incentive column: ' || SQLERRM);
+          END;
+      END IF;
+  
+      IF total_sales >= sale_limit THEN
+          v_incentive := total_sales * incentive_rate;
+      ELSE
+          v_incentive := 0;  -- No incentive if total sales is below the sale limit
+      END IF;
+  
+      BEGIN
+          UPDATE EMPLOYEE_SALARY
+          SET INCENTIVE = v_incentive
+          WHERE EMPLOYEE_ID = emp_id;
+         
+          DBMS_OUTPUT.PUT_LINE('Incentive calculated and record updated successfully.');
+      EXCEPTION
+          WHEN OTHERS THEN
+              DBMS_OUTPUT.PUT_LINE('Error updating incentive: ' || SQLERRM);
+      END;
+  END;
+  /
+  
+  
+  BEGIN
+      calculate_incentive(110, 5000, 10000, 0.05); -- Employee ID 110, total sales 5000, sale limit 10000, incentive rate 5%
+  END;
+  /
 
 
 PROGRAM 9
 Write a PL/SQL program to count number of employees in department 50 and check whether this department have any vacancies or not. There are 45 vacancies in this department.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_employee_count NUMBER;
+      v_vacancies NUMBER := 45;
+  BEGIN
+      SELECT COUNT(*)
+      INTO v_employee_count
+      FROM employees
+      WHERE department_id = 50;
+  
+      IF v_employee_count < v_vacancies THEN
+          DBMS_OUTPUT.PUT_LINE('Department 50 has ' || v_employee_count || ' employees and ' || (v_vacancies - v_employee_count) || ' vacancies.');
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('Department 50 is fully staffed with ' || v_employee_count || ' employees.');
+      END IF;
+  END;
+  /
 
 
 PROGRAM 10
  Write a PL/SQL program to count number of employees in a specific department and check whether this department have any vacancies or not. If any vacancies, how many vacancies are in that department.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      v_department_id NUMBER := 50; 
+      v_employee_count NUMBER;
+      v_vacancies NUMBER := 45; 
+  BEGIN
+      SELECT COUNT(*)
+      INTO v_employee_count
+      FROM employees
+      WHERE department_id = v_department_id;
+  
+      IF v_employee_count < v_vacancies THEN
+          DBMS_OUTPUT.PUT_LINE('Department ' || v_department_id || ' has ' || v_employee_count || ' employees and ' || (v_vacancies - v_employee_count) || ' vacancies.');
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('Department ' || v_department_id || ' is fully staffed with ' || v_employee_count || ' employees.');
+      END IF;
+  END;
+  /
 
 PROGRAM 11
 Write a PL/SQL program to display the employee IDs, names, job titles, hire dates, and salaries of all employees.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  DECLARE
+      CURSOR employee_cursor IS
+          SELECT employee_id, last_name , job_id, hire_date, salary
+          FROM EMPLOYEES8;
+  BEGIN
+     
+      DBMS_OUTPUT.PUT_LINE('Employee ID | Full Name | Job Title | Hire Date | Salary');
+      DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------');
+      FOR emp_rec IN employee_cursor LOOP
+          DBMS_OUTPUT.PUT_LINE(
+              emp_rec.employee_id || ' | ' ||
+              emp_rec.last_name || ' | ' ||
+              emp_rec.job_id || ' | ' ||
+              TO_CHAR(emp_rec.hire_date, 'DD-MON-YYYY') || ' | ' ||
+              TO_CHAR(emp_rec.salary, 'FM$999,999.99')
+          );
+      END LOOP;
+     
+  END;
+  /
 
 PROGRAM 12
 Write a PL/SQL program to display the employee IDs, names, and department names of all employees.
