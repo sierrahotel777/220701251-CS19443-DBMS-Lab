@@ -1,1 +1,35 @@
+1.	The following statement executes successfully.
 
+Identify the Errors
+
+      SELECT employee_id, last_name 
+sal*12 ANNUAL SALARY 
+FROM employees;
+Queries
+
+SELECT employee_id, last_name, salary*12 ANNUAL_SALARY FROM employees;
+
+2.	Show the structure of departments the table. Select all the data from it.
+
+DESCRIBE departments
+SELECT * FROM departments;
+
+3.Create a query to display the last name, job code, hire date, and employee number for each employee, with employee number appearing first.
+
+Select employee_id, last_name, job_id, hire_date startdate from employees;
+
+4.Provide an alias STARTDATE for Hire date.
+
+Select hiredate as startdate from department;
+
+5.Create a query to display all unique job codes from the EMPLOYEES table.
+
+Select distinct job_id from employees;
+
+6.Display the last name concatenated with the j0b ID,separated by a comma and space,name the column EMPLOYEE and TITLE.
+
+Select lastname ||','||jobID as "EMPLOYEE and TITLE" from employee;
+
+7. Create a query to display all the data from the employees table.Separate each column by comma.Name the column THE_OUTPUT.
+
+Select empno||','||empname||','||hiredate||','||jobcode as "THE_OUTPUT" from employees;
