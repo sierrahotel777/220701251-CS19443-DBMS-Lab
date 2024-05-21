@@ -1,48 +1,48 @@
 1.	Create MY_EMPLOYEE table with the following structure
 
-CREATE TABLE MY_EMPLOYEE (
-    ID NUMBER(4) NOT NULL,
-    Last_name VARCHAR2(25),
-    First_name VARCHAR2(25),
-    Userid VARCHAR2(25),
-    Salary NUMBER(9,2)
-);
+        CREATE TABLE MY_EMPLOYEE (
+            ID NUMBER(4) NOT NULL,
+            Last_name VARCHAR2(25),
+            First_name VARCHAR2(25),
+            Userid VARCHAR2(25),
+            Salary NUMBER(9,2)
+        );
 
 2.	Add the first and second rows data to MY_EMPLOYEE table from the following sample data.
 
-INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
-VALUES (1, 'Patel', 'Ralph', 'rpatel', 895);
-INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
-VALUES (2, 'Dancs', 'Betty', 'bdancs', 860);
+        INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
+        VALUES (1, 'Patel', 'Ralph', 'rpatel', 895);
+        INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
+        VALUES (2, 'Dancs', 'Betty', 'bdancs', 860);
 
 3.	Display the table with values.
 
-SELECT * FROM MY_EMPLOYEE;
+        SELECT * FROM MY_EMPLOYEE;
 
 4.	Populate the next two rows of data from the sample data. Concatenate the first letter of the first_name with the first seven characters of the last_name to produce Userid.
 
-INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
-VALUES (3, 'Biri', 'Ben', CONCAT(UPPER(SUBSTR('Ben', 1, 1)), SUBSTR('Biri', 1, 7)), 1100);
+        INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
+        VALUES (3, 'Biri', 'Ben', CONCAT(UPPER(SUBSTR('Ben', 1, 1)), SUBSTR('Biri', 1, 7)), 1100);
 
-INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
-VALUES (4, 'Newman', 'Chad', CONCAT(UPPER(SUBSTR('Chad', 1, 1)), SUBSTR('Newman', 1, 7)), 750);
+        INSERT INTO MY_EMPLOYEE (ID, Last_name, First_name, Userid, Salary)
+        VALUES (4, 'Newman', 'Chad', CONCAT(UPPER(SUBSTR('Chad', 1, 1)), SUBSTR('Newman', 1, 7)), 750);
 
 5.	Make the data additions permanent.
 
-COMMIT;
+        COMMIT;
 
 6.	Change the last name of employee 3 to Drexler.
 
-UPDATE MY_EMPLOYEE SET Last_name = 'Drexler' WHERE ID = 3;
+        UPDATE MY_EMPLOYEE SET Last_name = 'Drexler' WHERE ID = 3;
 
 7.	Change the salary to 1000 for all the employees with a salary less than 900.
 
-UPDATE MY_EMPLOYEE SET Salary = 1000 WHERE Salary < 900;
+        UPDATE MY_EMPLOYEE SET Salary = 1000 WHERE Salary < 900;
 
 8.	Delete Betty dancs from MY _EMPLOYEE table.
 
-DELETE FROM MY_EMPLOYEE WHERE Last_name = 'Dancs' AND First_name = 'Betty';
+        DELETE FROM MY_EMPLOYEE WHERE Last_name = 'Dancs' AND First_name = 'Betty';
 
 9.	Empty the fourth row of the emp table.
 
-DELETE FROM MY_EMPLOYEE WHERE ID = 4;
+        DELETE FROM MY_EMPLOYEE WHERE ID = 4;
