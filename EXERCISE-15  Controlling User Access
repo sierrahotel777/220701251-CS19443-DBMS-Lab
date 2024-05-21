@@ -1,1 +1,36 @@
+1. What privilege should a user be given to log on to the Oracle Server? Is this a system or an
+object privilege?
+
+
+
+
+2. What privilege should a user be given to create tables?
+
+
+
+3. If you create a table, who can pass along privileges to other users on your table?
+
+
+
+4. You are the DBA. You are creating many users who require the same system privileges.
+What should you use to make your job easier?
+
+
+
+5. What command do you use to change your password?
+
+6. Grant another user access to your DEPARTMENTS table. Have the user grant you query access
+to his or her DEPARTMENTS table.
+
+7. Query all the rows in your DEPARTMENTS table.
+
+8. Add a new row to your DEPARTMENTS table. Team 1 should add Education as department
+number 500. Team 2 should add Human Resources department number 510. Query the other
+team’s table.
+
+9. Query the USER_TABLES data dictionary to see information about the tables that you own.
+
+10. Revoke the SELECT privilege on your table from the other team.
+
+11. Remove the row you inserted into the DEPARTMENTS table in step 8 and save the changes.
 
