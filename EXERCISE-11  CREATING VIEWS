@@ -1,25 +1,55 @@
-1.	Create a view called EMPLOYEE_VU based on the employee numbers, employee names and department numbers from the EMPLOYEES table. Change the heading for the employee name to EMPLOYEE.
+1. Create a view called EMPLOYEES_VU based on the employee numbers, employee names, and department numbers from the EMPLOYEES table. Change the heading for the employee name to EMPLOYEE.
+
+	CREATE OR REPLACE VIEW employees_vu AS
+	SELECT employee_id, last_name employee, department_id
+	FROM employees;
+
+2. Display the contents of the EMPLOYEES_VU view.
+	
+	SELECT *
+	FROM employees_vu;
+
+3. Select the view name and text from the USER_VIEWS data dictionary view.
+
+	SELECT view_name, text
+	FROM user_views;
+
+4. Using your EMPLOYEES_VU view, enter a query to display all employee names and department
+   numbers.
+
+	SELECT employee, department_id
+	FROM employees_vu;
+
+5. Create a view named DEPT50 that contains the employee numbers, employee last names, and department numbers for all employees in department 50. Label the view columns
+   EMPNO, EMPLOYEE, and DEPTNO. Do not allow an employee to be reassigned to another department through the view.
+
+	CREATE VIEW dept50 AS
+	SELECT employee_id empno, last_name employee,
+	department_id deptno
+	FROM employees
+	WHERE department_id = 50
+	WITH CHECK OPTION CONSTRAINT emp_dept_50;
+
+6. Display the structure and contents of the DEPT50 view.
+
+	DESCRIBE dept50
+
+	SELECT *
+	FROM dept50;
+
+7. Attempt to reassign Matos to department 80.
+
+	UPDATE dept50
+	SET deptno = 80
+	WHERE employee = ’Matos’;
 
 
+8. Create a view called SALARY_VU based on the employee last names, department names, salaries, and salary grades for all employees. Use the EMPLOYEES, DEPARTMENTS, and JOB_GRADES
+   tables. Label the columns Employee, Department, Salary, and Grade, respectively.
 
-
-2.	Display the contents of the EMPLOYEES_VU view.
-
-
-
-3.	Select the view name and text from the USER_VIEWS data dictionary views.
-
-
-4.	Using your EMPLOYEES_VU view, enter a query to display all employees names and department.
-
-
-5.	Create a view named DEPT50 that contains the employee number, employee last names and department numbers for all employees in department 50.Label the view columns EMPNO, EMPLOYEE and DEPTNO. Do not allow an employee to be reassigned to another department through the view.
-
-
-6.	Display the structure and contents of the DEPT50 view.
-
-
-7.	Attempt to reassign Matos to department 80.
-
-
-8.	Create a view called SALARY_VU based on the employee last names, department names, salaries, and salary grades for all employees. Use the Employees, DEPARTMENTS and JOB_GRADE tables. Label the column Employee, Department, salary, and Grade respectively.
+	CREATE OR REPLACE VIEW salary_vu
+	AS
+	SELECT e.last_name "Employee",d.department_name "Department",e.salary "Salary",j.grade_level "Grades"
+	FROM employees e,departments d,job_grades j
+	WHERE e.department_id = d.department_id
+	AND e.salary BETWEEN j.lowest_sal and j.highest_sal;
