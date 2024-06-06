@@ -79,6 +79,10 @@
 
 10. Create a query to display the name and hire date of any employee hired after employee Davies.
 
+SELECT e.last_name, e.hire_date
+	FROM employees e, employees davies
+	WHERE davies.last_name = ’Davies’
+	AND davies.hire_date < e.hire_date
 
 11. Display the names and hire dates for all employees who were hired before their managers, along
     with their manager’s names and hire dates. Label the columns Employee, Emp
