@@ -295,64 +295,109 @@ Write a PL/SQL program to display the employee IDs, names, job titles, hire date
 PROGRAM 12
 Write a PL/SQL program to display the employee IDs, names, and department names of all employees.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT e.employee_id, e.first_name, m.first_name AS manager_name
+    FROM employees e
+    LEFT JOIN employees m ON e.manager_id = m.employee_id;
+emp_recordemp_cursor%ROWTYPE;
+BEGIN
+  OPEN emp_cursor;
+  FETCH emp_cursor INTO emp_record;
+  WHILE emp_cursor%FOUND LOOP
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_record.employee_id);
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || emp_record.first_name);
+    DBMS_OUTPUT.PUT_LINE('Manager Name: ' || emp_record.manager_name);
+    DBMS_OUTPUT.PUT_LINE('-------------------------');
+    FETCH emp_cursor INTO emp_record;
+  END LOOP;
+  CLOSE emp_cursor;
+END;
+/
 
 PROGRAM 13
  Write a PL/SQL program to display the job IDs, titles, and minimum salaries of all jobs.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DECLARE
+  CURSOR job_cursor IS
+    SELECT job_id, job_title, min_salary
+    FROM jobs;
+job_recordjob_cursor%ROWTYPE;
+BEGIN
+  OPEN job_cursor;
+  FETCH job_cursor INTO job_record;
+  WHILE job_cursor%FOUND LOOP
+    DBMS_OUTPUT.PUT_LINE('Job ID: ' || job_record.job_id);
+    DBMS_OUTPUT.PUT_LINE('Job Title: ' || job_record.job_title);
+    DBMS_OUTPUT.PUT_LINE('Minimum Salary: ' || job_record.min_salary);
+    DBMS_OUTPUT.PUT_LINE('-------------------------');
+    FETCH job_cursor INTO job_record;
+  END LOOP;
+  CLOSE job_cursor;
+END;
+/
 
 
 PROGRAM 14
  Write a PL/SQL program to display the employee IDs, names, and job history start dates of all employees.
 
+DECLARE
+    CURSOR employees_cur IS
+      SELECT employee_id,
+             first_name,
+             job_title,
+             hire_date
+      FROM   employees
+             NATURAL join jobs;
+    emp_first_date DATE;
+BEGIN
+    dbms_output.Put_line(Rpad('Employee ID', 15)
+                         ||Rpad('First Name', 25)
+                         ||Rpad('Job Title', 35)
+                         ||'First Date');
 
+dbms_output.Put_line('-----------------------------------------------------------------------------------------');
 
+FOR emp_sal_rec IN employees_cur LOOP
+    -- find out most recent end_date in job_history
+    SELECT Max(end_date) + 1
+    INTO   emp_first_date
+    FROM   job_history
+    WHERE  employee_id = emp_sal_rec.employee_id;
 
+    IF emp_first_date IS NULL THEN
+      emp_first_date := emp_sal_rec.hire_date;
+    END IF;
 
-
-
-
-
-
-
-
-
-
-
-
+    dbms_output.Put_line(Rpad(emp_sal_rec.employee_id, 15)
+                         ||Rpad(emp_sal_rec.first_name, 25)
+                         || Rpad(emp_sal_rec.job_title, 35)
+                         || To_char(emp_first_date, 'dd-mon-yyyy'));
+END LOOP;
+END; 
+/
 
 PROGRAM 15
 Write a PL/SQL program to display the employee IDs, names, and job history end dates of all employees.
 
-
-
+DECLARE
+v_employee_idemployees.employee_id%TYPE;
+v_first_nameemployees.first_name%TYPE;
+v_end_datejob_history.end_date%TYPE;
+  CURSOR c_employees IS
+    SELECT e.employee_id, e.first_name, jh.end_date
+    FROM employees e
+    JOIN job_history jh ON e.employee_id = jh.employee_id;
+BEGIN
+  OPEN c_employees;
+  FETCH c_employees INTO v_employee_id, v_first_name, v_end_date;
+  WHILE c_employees%FOUND LOOP
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_first_name);
+    DBMS_OUTPUT.PUT_LINE('End Date: ' || v_end_date);
+    DBMS_OUTPUT.PUT_LINE('----------------------');
+    FETCH c_employees INTO v_employee_id, v_first_name, v_end_date;
+  END LOOP;
+  CLOSE c_employees;
+END;
+/
